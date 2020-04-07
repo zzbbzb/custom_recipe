@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/community/community",
+    "pages/orders/orders",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#dddddd",
+    "navigationBarTitleText": "菜譜",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "asserts/images/tab_bar/mine.png",
+        "selectedIconPath": "asserts/images/tab_bar/mine_activated.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "asserts/images/tab_bar/community.png",
+        "selectedIconPath": "asserts/images/tab_bar/community_activated.png"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "下单",
+        "iconPath": "asserts/images/tab_bar/orders.png",
+        "selectedIconPath": "asserts/images/tab_bar/orders_activated.png"
+      }
+    ]
+  }
+}

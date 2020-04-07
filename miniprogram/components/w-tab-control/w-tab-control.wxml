@@ -1,0 +1,11 @@
+
+<view class="tab-control">
+  <block wx:for="{{tab_title}}" wx:key="index">
+    <view class="tab-item {{index == curIndex ? 'selected' : '' }}" 
+          data-index="{{index}}" 
+          bindtap="clickTabTitle">
+      <text>{{item}}</text>
+      <view class="{{index == curIndex ? 'tab-line' : '' }}"></view>
+    </view>
+  </block>
+</view>

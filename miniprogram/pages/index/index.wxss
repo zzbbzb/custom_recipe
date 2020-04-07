@@ -1,0 +1,23 @@
+/* pages/index/index.wxss */
+.search{
+  display: flex;
+  margin:10rpx;
+  align-items: center;
+}
+
+.statusBar{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.addImg{
+  width:40rpx;
+  height:40rpx;
+}
+
+.addImg:active{
+  border-radius: 20rpx;
+  background:#dddddd;
+}

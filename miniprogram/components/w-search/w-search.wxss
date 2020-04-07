@@ -1,0 +1,45 @@
+/* components/w-search/w-search.wxss */
+.search-box{
+  display: flex;
+  height: 6.5vh;
+  flex-direction: wrap;
+  /* background: #dddddd; */
+  border-radius: 50rpx;
+  align-items: center;
+}
+
+.search-box-background{
+  background: #dddddd;
+}
+
+.search-box-click:active{
+  background: #dddddd;
+}
+
+image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.search_img{
+  margin-left: 20rpx;
+  margin-right: 15rpx;
+}
+
+.search{
+  flex:1;
+  font-size:30rpx;
+  width:100%;
+}
+
+.search_clear{
+  flex: 0 1 30rpx;
+  margin-left: 20rpx;
+  margin-right: 30rpx;
+}
+
+.search_img_only{
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0;
+}

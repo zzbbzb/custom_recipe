@@ -1,0 +1,7 @@
+<!--pages/search/search.wxml-->
+
+<view class="">
+  <w-search class="search" search_width="80" default_content="搜索菜谱"/>
+  <view class="canel">取消</view>
+</view>
+

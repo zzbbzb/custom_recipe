@@ -1,0 +1,34 @@
+/* components/w-tab-control/w-tab-control.wxss */
+
+.tab-control{
+  display: flex;
+  justify-content: space-evenly;
+   
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  height:80rpx;
+  border-bottom: 1px solid #dddddd;
+}
+
+text{
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+.tab-line{
+  width: 50rpx;
+  border-bottom: solid red 6rpx;
+}
+
+
+
