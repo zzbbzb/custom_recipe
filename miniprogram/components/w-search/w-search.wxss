@@ -1,7 +1,7 @@
 /* components/w-search/w-search.wxss */
 .search-box{
   display: flex;
-  height: 6.5vh;
+  height: 5vh;
   flex-direction: wrap;
   /* background: #dddddd; */
   border-radius: 50rpx;

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "w-search":"/components/w-search/w-search"
+  }
+}

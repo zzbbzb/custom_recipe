@@ -1,0 +1,7 @@
+<!--pages/searchResult/searchResult.wxml-->
+<view class="container">
+  <view class="searchBar">
+    <w-search class="search" search_width="80" default_content="搜索菜谱" bind:updateInfo="updateHistoryInfo" />
+  </view>
+</view>
+

@@ -5,7 +5,69 @@ Page({
    * 页面的初始数据
    */
   data: {
+    historyDeleteImgPath:'/asserts/images/history_bar/delete.png',
+    historyInfo:[]
+  },
 
+  // 搜索历史文本
+  searchHistoryItem: function(e)
+  { 
+    let info = e.currentTarget.dataset.search_info;
+    wx.navigateTo({
+      url:"/pages/searchResult/searchResult?searchInfo=" + info,
+    })
+  },
+
+  setSearchValue: function (data) {
+    const search = this.selectComponent('.search');
+
+    search.setInputData(data);
+  },
+
+
+  // 取消搜索
+  canel: function()
+  {
+    console.log("取消搜索,回到主页")
+  },
+
+  // 更新历史记录
+  updateHistoryInfo: function(e)
+  {
+    let searchInfo = e.detail.searchInfo;
+    let tmpHistoryInfo = this.data.historyInfo;
+    let index = tmpHistoryInfo.indexOf(searchInfo);
+    console.log(tmpHistoryInfo);
+    console.log(index);
+    if(index != -1)
+    {
+      console.log(tmpHistoryInfo.splice(index,1))
+    }
+    
+    tmpHistoryInfo.unshift(searchInfo);
+    if (tmpHistoryInfo.length > 6)
+    {
+      console.log("tmpHistoryInfo=", tmpHistoryInfo)
+      tmpHistoryInfo.pop();
+    }
+
+    wx.setStorage({
+      key: "SearchHistoryInfo",
+      data: tmpHistoryInfo
+    });
+
+    this.setData({
+      historyInfo: tmpHistoryInfo
+    });
+  },
+
+  // 删除历史记录
+  deleteHistory: function()
+  {
+    this.setData({
+      historyInfo: []
+    });
+    wx.clearStorage("SearchHistoryInfo");
   },
 
   /**
@@ -19,7 +81,16 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    try {
+      var value = wx.getStorageSync("SearchHistoryInfo")
+      if (value) {
+        this.setData({
+          historyInfo: value
+        });
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
   },
 
   /**
@@ -60,7 +131,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

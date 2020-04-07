@@ -3,15 +3,15 @@
 
 <block wx:if="{{isOnlyImageBtn}}">
   <view class="search-box search-box-click" style="width:6.5vh;justify-content: center;" bindtap="skipToSearchPage">
-    <image class="search_img search_img_only" src="/asserts/images/search/search.png"></image>
+    <image class="search_img search_img_only" src="{{searchImgPath}}"></image>
   </view>
 </block>
 <block wx:else>
-  <view class="search-box search-box-background" style="width:{{search_width}}vw" bindtap="{{disable ? 'skipToSearchPage': ''}}">
-    <image class="search_img" style="flex: 0 1 30rpx;" src="/asserts/images/search/search.png"></image>
-    <input placeholder="{{default_content}}" class="search" bindinput="showSearchClear" value="{{inputValue}}" disabled="{{disable}}"></input>
+  <view class="search-box search-box-background" style="{{auto_width?'width:100%': 'width:'+ search_width +'vw'}}" bindtap="{{disable ? 'skipToSearchPage': ''}}">
+    <image class="search_img" style="flex: 0 1 30rpx;" src="{{searchImgPath}}"></image>
+    <input placeholder="{{default_content}}" class="search" bindinput="showSearchClear" value="{{inputValue}}" disabled="{{disable}}" confirm-type="search" bindconfirm="searchAndUpdateInfo" bindfocus="backPageToLast"></input>
     <block wx:if="{{isInput}}">
-      <image class="search_clear" src="/asserts/images/search/cross_out.png" bindtap="clearInputData"></image>
+      <image class="search_clear" src="{{searchCrossOutImgPath}}" bindtap="clearInputData"></image>
     </block>
   </view>
 </block>

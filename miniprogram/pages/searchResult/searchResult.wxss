@@ -1,0 +1,13 @@
+/* pages/searchResult/searchResult.wxss */
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:30rpx;
+}

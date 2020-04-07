@@ -1,7 +1,26 @@
 <!--pages/search/search.wxml-->
 
-<view class="">
-  <w-search class="search" search_width="80" default_content="搜索菜谱"/>
-  <view class="canel">取消</view>
-</view>
+<view class="container">
+  <view class="searchBar">
+    <w-search class="search" auto_width default_content="搜索菜谱" bind:updateInfo="updateHistoryInfo" />
+    <view class="canel" bindtap="canel">
+      <text>取消</text>
+    </view>
+  </view>
 
+  <view class="historyBar">
+    <view class="historyTitle">
+      <text>历史记录</text>
+    </view>
+    <image class="deleteImg"  src="{{historyDeleteImgPath}}" bindtap="deleteHistory"/>
+  </view>
+
+  <view class="historyContent">
+    <block wx:for="{{historyInfo}}" wx:key="index">
+      <view class="historyItem" data-search_info="{{item}}" bindtap="searchHistoryItem">
+        <text>{{item}}</text>
+      </view> 
+    </block>
+  </view>
+
+</view>

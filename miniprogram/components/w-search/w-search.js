@@ -4,19 +4,19 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    default_content:{
+    default_content:{     // 默认内容
       type: String,
       value: ""
     },
-    search_width:{
+    search_width:{        // 长度
       type: Number,
       value: 100
     },
-    disable:{
+    disable:{             // 禁用
       type: Boolean,
       value: false
     },
-    isOnlyImageBtn:{
+    isOnlyImageBtn:{      // 显示只有按钮
       type: Boolean,
       value: false,
       observer: function (newv, old)
@@ -24,6 +24,10 @@ Component({
         console.log(old);
         console.log(newv);
       }
+    },
+    auto_width:{          // 自动长度
+      type: Boolean,
+      value: false
     }
 
   },
@@ -34,12 +38,33 @@ Component({
   data: {
     isInput: false,
     inputValue:'',
+    searchImgPath:'/asserts/images/search/search.png',
+    searchCrossOutImgPath:'/asserts/images/search/cross_out.png'
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    backPageToLast: function(e)
+    {
+      let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+      console.log(pages)
+      let prevPage = pages[pages.length - 2]; 
+      console.log(prevPage)
+
+      prevPage.setSearchValue(this.data.inputValue);
+
+      wx.navigateBack({
+        delta: 1
+      })
+    },
+    // 更新历史记录信息
+    searchAndUpdateInfo: function(e)
+    {
+      this.triggerEvent("updateInfo",{searchInfo:e.detail.value})
+    },
+
     // 显示清空搜索内容按钮
     showSearchClear: function(e)
     {
@@ -54,6 +79,15 @@ Component({
 
       this.setData({
         isInput: this.data.isInput 
+      });
+    },
+
+    setInputData: function(data)
+    {
+      let tmpIsInput = data ===''?false:true;
+      this.setData({
+        inputValue: data,
+        isInput: tmpIsInput
       });
     },
 
