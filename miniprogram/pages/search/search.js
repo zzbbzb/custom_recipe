@@ -6,16 +6,43 @@ Page({
    */
   data: {
     historyDeleteImgPath:'/asserts/images/history_bar/delete.png',
-    historyInfo:[]
+    historyInfo:[],
+    isFocus: true,
+    hideCanel: false,
+    findContent:[],
+  },
+
+  updataFocus: function()
+  { 
+    if (!this.data.isFocus)
+    {
+      this.setData({
+        isFocus: !this.data.isFocus,
+        hideCanel: false,
+      })
+    }
   },
 
   // 搜索历史文本
   searchHistoryItem: function(e)
   { 
     let info = e.currentTarget.dataset.search_info;
-    wx.navigateTo({
-      url:"/pages/searchResult/searchResult?searchInfo=" + info,
+    this.setSearchValue(info);
+    // 云内查找数据 同步
+    let findContent = [];
+
+    // 显示
+
+
+    this.setData({
+      findContent: findContent,
+      isFocus: false,
+      hideCanel: true
     })
+
+    // wx.navigateTo({
+    //   url:"/pages/searchResult/searchResult?searchInfo=" + info,
+    // })
   },
 
   setSearchValue: function (data) {
@@ -23,7 +50,6 @@ Page({
 
     search.setInputData(data);
   },
-
 
   // 取消搜索
   canel: function()

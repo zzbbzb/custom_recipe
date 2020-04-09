@@ -28,6 +28,10 @@ Component({
     auto_width:{          // 自动长度
       type: Boolean,
       value: false
+    },
+    isBackPage:{          // 回退上一页面
+      type: Boolean,
+      value: false
     }
 
   },
@@ -37,6 +41,7 @@ Component({
    */
   data: {
     isInput: false,
+    isFocus: false,
     inputValue:'',
     searchImgPath:'/asserts/images/search/search.png',
     searchCrossOutImgPath:'/asserts/images/search/cross_out.png'
@@ -46,6 +51,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
+
+    focusInput: function(e)
+    {
+      console.log("focusInput=",e)
+      this.triggerEvent("focusInput",{})
+    },
+
     backPageToLast: function(e)
     {
       let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
@@ -54,6 +66,7 @@ Component({
       console.log(prevPage)
 
       prevPage.setSearchValue(this.data.inputValue);
+      // prevPage.setInFocus(true);
 
       wx.navigateBack({
         delta: 1

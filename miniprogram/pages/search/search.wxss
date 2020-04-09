@@ -12,12 +12,18 @@
 .search {
   flex:1rpx;
   display: flex;
+}
+
+.search_margin {
   margin: 10rpx 0 10rpx 30rpx;
+}
+
+.search_hide_margin {
+  margin: 10rpx 30rpx 10rpx 30rpx;
 }
 
 .canel {
   flex:0 1 120rpx;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
