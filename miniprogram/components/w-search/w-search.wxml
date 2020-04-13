@@ -9,7 +9,7 @@
 <block wx:else>
   <view class="search-box search-box-background" style="{{auto_width?'width:100%': 'width:'+ search_width +'vw'}}" bindtap="{{disable ? 'skipToSearchPage': ''}}">
     <image class="search_img" style="flex: 0 1 30rpx;" src="{{searchImgPath}}"></image>
-    <input placeholder="{{default_content}}" class="search" bindinput="showSearchClear" value="{{inputValue}}" disabled="{{disable}}" confirm-type="search" bindconfirm="searchAndUpdateInfo" bindfocus="{{isBackPage ? 'backPageToLast' : ''}}"  bindfocus="focusInput"></input>
+    <input placeholder="{{default_content}}" class="search" bindinput="showSearchClear" value="{{inputValue}}" disabled="{{disable}}" confirm-type="search" bindconfirm="searchAndUpdateInfo" bindfocus="focusInput"></input>
     <block wx:if="{{isInput}}">
       <image class="search_clear" src="{{searchCrossOutImgPath}}" bindtap="clearInputData"></image>
     </block>

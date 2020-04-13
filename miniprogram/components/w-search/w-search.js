@@ -52,27 +52,14 @@ Component({
    */
   methods: {
 
+    // 焦点在input上,用来判别区分显示搜索页面和搜索结果
     focusInput: function(e)
     {
       console.log("focusInput=",e)
       this.triggerEvent("focusInput",{})
     },
 
-    backPageToLast: function(e)
-    {
-      let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
-      console.log(pages)
-      let prevPage = pages[pages.length - 2]; 
-      console.log(prevPage)
-
-      prevPage.setSearchValue(this.data.inputValue);
-      // prevPage.setInFocus(true);
-
-      wx.navigateBack({
-        delta: 1
-      })
-    },
-    // 更新历史记录信息
+    // 更新历史记录信息, 并且跳转到搜索结果页面
     searchAndUpdateInfo: function(e)
     {
       this.triggerEvent("updateInfo",{searchInfo:e.detail.value})
@@ -116,6 +103,9 @@ Component({
     skipToSearchPage: function(e)
     {
       console.log("跳转到搜索页面");
+      wx.navigateTo({
+        url: '/pages/search/search',
+      })
     }
   }
 })

@@ -2,7 +2,7 @@
 
 <view class="container">
   <view class="searchBar">
-    <w-search class="search {{hideCanel? 'search_hide_margin' : 'search_margin'}}" auto_width default_content="搜索菜谱" bind:updateInfo="updateHistoryInfo" bind:focusInput="updataFocus"/>
+    <w-search class="search {{hideCanel? 'search_hide_margin' : 'search_margin'}}" auto_width default_content="搜索菜谱" bind:updateInfo="searchInfo" bind:focusInput="updataFocus"/>
     <view class="canel" bindtap="canel" style="display:{{hideCanel? 'none': 'flex'}}">
       <text>取消</text>
     </view>

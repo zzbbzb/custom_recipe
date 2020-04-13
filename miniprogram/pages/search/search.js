@@ -29,6 +29,7 @@ Page({
     let info = e.currentTarget.dataset.search_info;
     this.setSearchValue(info);
     // 云内查找数据 同步
+    console.log("查中数据")
     let findContent = [];
 
     // 显示
@@ -39,10 +40,6 @@ Page({
       isFocus: false,
       hideCanel: true
     })
-
-    // wx.navigateTo({
-    //   url:"/pages/searchResult/searchResult?searchInfo=" + info,
-    // })
   },
 
   setSearchValue: function (data) {
@@ -54,12 +51,41 @@ Page({
   // 取消搜索
   canel: function()
   {
-    console.log("取消搜索,回到主页")
+    if (this.data.findContent === undefined || this.data.findContent.length == 0)
+    {
+      // 直接回
+      console.log("返回主页")
+      wx.navigateBack({
+        delta:1
+      });
+    }
+    else
+    {
+      console.log("显示上次查找的东西")
+      // 失去焦点, 显示上次查找的东西
+      this.setData({
+        isFocus: false,
+        hideCanel: true
+      })
+    }
+  },
+
+  searchInfo: function(e)
+  {
+    this.setData({
+      isFocus: false,
+      hideCanel: true,
+    })
+
+    console.log("查找数据")
+
+    this.updateHistoryInfo(e)
   },
 
   // 更新历史记录
   updateHistoryInfo: function(e)
   {
+
     let searchInfo = e.detail.searchInfo;
     let tmpHistoryInfo = this.data.historyInfo;
     let index = tmpHistoryInfo.indexOf(searchInfo);
