@@ -3,8 +3,7 @@
     "pages/index/index",
     "pages/community/community",
     "pages/orders/orders",
-    "pages/search/search",
-    "pages/searchResult/searchResult"
+    "pages/search/search"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
