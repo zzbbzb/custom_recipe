@@ -1,0 +1,8 @@
+<!--components/w-image/w-image.wxml-->
+
+<view class="container">
+  <view class="add">
+    <text class="text_title">+菜谱封面</text>
+    <text class="text_subtitle">有人的封面图显吸引人的关键</text>
+  </view>
+</view>

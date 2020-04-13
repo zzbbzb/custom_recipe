@@ -1,0 +1,14 @@
+/* components/w-image/w-image.wxss */
+.container{
+  height: 40vh;
+}
+
+.add{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background:#A2A2A2;
+  
+}
