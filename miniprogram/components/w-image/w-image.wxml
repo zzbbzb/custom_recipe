@@ -1,8 +1,26 @@
 <!--components/w-image/w-image.wxml-->
 
 <view class="container">
-  <view class="add">
-    <text class="text_title">+菜谱封面</text>
-    <text class="text_subtitle">有人的封面图显吸引人的关键</text>
+
+  <view class="titleImg">
+    <image wx:if="{{isShowDelImg}}" class="del_img" src="{{del_img_path}}" bindtap="updataShowDelDialog"></image>
+    <view wx:if="{{!isShowImg}}" class="add" bindtap="GetImage">
+      <text class="text_title">+菜谱封面</text>
+      <text class="text_subtitle">有人的封面图显吸引人的关键</text>
+    </view>
+    <image wx:else src="{{imgPath}}" mode="aspectFit"></image>
   </view>
+
+
+
+
+  <view class="title">
+    <textarea class="textTitle" maxlength="-1" bindblur="bindTextAreaBlur" auto-height placeholder="写下你的菜谱名吧" />
+  </view>
+
+
 </view>
+
+  <mp-dialog title="" show="{{dialogDelShow}}" bindbuttontap="tapDialogDelButton" buttons="{{[{text: '取消'}, {text: '确认'}]}}">
+    <view>确认删除图片？</view>
+  </mp-dialog>

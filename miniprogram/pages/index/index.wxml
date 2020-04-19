@@ -3,7 +3,7 @@
 <view class="container">
   <view class="statusBar">
     <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" disable/>
-    <image class="addImg" src="/asserts/images/add/add.png"></image>
+    <image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
   </view>
   <w-tab-control tab_title="{{tab_title}}" />
 </view>
