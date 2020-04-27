@@ -38,6 +38,7 @@ image{
   font-size:50rpx;
   padding:20rpx;
   margin:20rpx;
+  /* min-height: 55rpx; */
 }
 
 .title{

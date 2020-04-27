@@ -11,13 +11,15 @@
     <image wx:else src="{{imgPath}}" mode="aspectFit"></image>
   </view>
 
-
-
-
   <view class="title">
     <textarea class="textTitle" maxlength="-1" bindblur="bindTextAreaBlur" auto-height placeholder="写下你的菜谱名吧" />
   </view>
 
+  <view class="title">
+    <textarea class="textTitle" maxlength="20" auto-height placeholder="价格菜谱" />
+  </view>
+
+  <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
 
 </view>
 

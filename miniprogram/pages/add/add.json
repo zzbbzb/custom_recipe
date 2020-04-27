@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "w-image": "/components/w-image/w-image"
-  }
+  },
+  "navigationBarTitleText": "新建菜譜"
 }
