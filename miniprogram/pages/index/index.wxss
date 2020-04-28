@@ -1,23 +1,31 @@
 /* pages/index/index.wxss */
-.search{
+
+.search {
   display: flex;
-  margin:10rpx;
+  margin: 10rpx;
   align-items: center;
 }
 
-.statusBar{
+.statusBar {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-right: 30rpx;
 }
 
-.addImg{
-  width:40rpx;
-  height:40rpx;
+.addImg {
+  width: 40rpx;
+  height: 40rpx;
 }
 
-.addImg:active{
+.addImg:active {
   border-radius: 20rpx;
-  background:#dddddd;
+  background: #ddd;
+}
+
+.loginBlock {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }

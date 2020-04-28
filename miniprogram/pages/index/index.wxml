@@ -1,10 +1,14 @@
 <!--pages/index/index.wxml-->
 
 <view class="container">
-  <view class="statusBar">
-    <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" disable/>
-    <image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
+  <view class="loginBlock" wx:if="{{!hasUserInfo}}">
+    <button class="loginBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
   </view>
-  <w-tab-control tab_title="{{tab_title}}" />
+  <block wx:else>
+    <view class="statusBar">
+      <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" disable/>
+      <image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
+    </view>
+    <w-tab-control tab_title="{{tab_title}}" />
+  </block>
 </view>
-
