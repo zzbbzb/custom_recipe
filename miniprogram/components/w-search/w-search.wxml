@@ -2,7 +2,7 @@
 
 
 <block wx:if="{{isOnlyImageBtn}}">
-  <view class="search-box search-box-click" style="width:6.5vh;justify-content: center;" bindtap="skipToSearchPage">
+  <view class="search-box search-box-click" style="width:6.5vh;justify-content: center;" bindtap="{{hasUserInfo ? 'skipToSearchPage' : 'tapDialog'}}">
     <image class="search_img search_img_only" src="{{searchImgPath}}"></image>
   </view>
 </block>
@@ -15,3 +15,7 @@
     </block>
   </view>
 </block>
+
+<mp-dialog title="" show="{{!hasUserInfo && showDialog}}" bindbuttontap="tapDialogButton" buttons="{{ [{text: '确定'}] }}">
+  <view>需要登录</view>
+</mp-dialog>

@@ -1,14 +1,16 @@
 <!--pages/index/index.wxml-->
 
 <view class="container">
-  <view class="loginBlock" wx:if="{{!hasUserInfo}}">
-    <button class="loginBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
-  </view>
-  <block wx:else>
     <view class="statusBar">
-      <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" disable/>
+      <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" hasUserInfo="{{hasUserInfo}}" disable/>
       <image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
     </view>
     <w-tab-control tab_title="{{tab_title}}" />
-  </block>
+    <view class="content">
+      <button class="loginBtn" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+    </view>
 </view>
+
+<mp-dialog title="" show="{{!hasUserInfo && showDialog}}" bindbuttontap="tapDialogButton" buttons="{{ [{text: '确定'}] }}">
+  <view>需要登录</view>
+</mp-dialog>

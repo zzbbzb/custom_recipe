@@ -1,4 +1,8 @@
 /* pages/index/index.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+}
 
 .search {
   display: flex;
@@ -23,9 +27,13 @@
   background: #ddd;
 }
 
-.loginBlock {
+.content {
   display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+
+.loginBtn
+{
+  margin: 50rpx 0 0 0;
+  background: #dddddd;
 }

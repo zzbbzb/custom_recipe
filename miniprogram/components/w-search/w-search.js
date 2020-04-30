@@ -32,6 +32,10 @@ Component({
     isBackPage:{          // 回退上一页面
       type: Boolean,
       value: false
+    },
+    hasUserInfo:{         // 是否有玩家信息
+      type: Boolean,
+      value: false
     }
 
   },
@@ -44,13 +48,29 @@ Component({
     isFocus: false,
     inputValue:'',
     searchImgPath:'/asserts/images/search/search.png',
-    searchCrossOutImgPath:'/asserts/images/search/cross_out.png'
+    searchCrossOutImgPath:'/asserts/images/search/cross_out.png',
+    showDialog: false
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+
+    // 打开登录提示框
+    tapDialog: function(e)
+    {
+      this.setData({
+        showDialog: !this.data.showDialog
+      })
+    },
+
+    tapDialogButton: function(e)
+    {
+      this.setData({
+        showDialog: !this.data.showDialog
+      })
+    },
 
     // 焦点在input上,用来判别区分显示搜索页面和搜索结果
     focusInput: function(e)
@@ -102,10 +122,14 @@ Component({
 
     skipToSearchPage: function(e)
     {
-      console.log("跳转到搜索页面");
-      wx.navigateTo({
-        url: '/pages/search/search',
-      })
+      if(this.properties.hasUserInfo)
+      {
+        console.log("跳转到搜索页面");
+        wx.navigateTo({
+          url: '/pages/search/search',
+        })
+      }
+      
     }
   }
 })

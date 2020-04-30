@@ -10,13 +10,29 @@ Page({
   data: {
     search_default_content: "请输入要查找的菜谱名称",
     tab_title: ["菜谱", "收藏", "兑换"],
-    hasUserInfo: false
+    hasUserInfo: app.globalData.hasUserInfo,
+    showDialog: false
   },
 
   addNewMenu: function()
   {
-    wx.navigateTo({
-      url: '/pages/add/add',
+    if(this.data.hasUserInfo)
+    {
+      wx.navigateTo({
+        url: '/pages/add/add',
+      })
+    }
+    else{
+      console.log("没有用户信息")
+      this.setData({
+        showDialog: !this.data.showDialog
+      })
+    }
+  },
+
+  tapDialogButton: function (e) {
+    this.setData({
+      showDialog: !this.data.showDialog
     })
   },
 
@@ -25,14 +41,34 @@ Page({
     console.log(e)
     if('userInfo' in e.detail)
     {
-      app.globalData.userInfo = e.detail.userInfo
+      app.globalData.userInfo = e.detail.userInfo;
+      app.globalData.hasUserInfo = true;
       this.setData({
         hasUserInfo: true
       })
       // 写入数据库 UserInfo todo
       console.log("写入数据库 UserInfo todo")
+     
+      this.tt();
+      
+      // 查找菜谱 todo
     }
     
+  },
+
+  async tt()
+  {
+    await wx.cloud.callFunction({
+      name: "addData",
+      data: {
+        "dataBaseName": "UserInfo",
+        "dataJson": {
+          "userInfo": app.globalData.userInfo
+        },
+        "waitFlag": true
+      }
+    }).then(console.log)
+    console.log("查找菜谱")
   },
   
   /**
@@ -41,8 +77,9 @@ Page({
   onLoad: function (options) {
     if (app.globalData.userInfo) {
       console.log("onLoad app.globalData.userInfo")
+      app.globalData.hasUserInfo = true;
       this.setData({
-        hasUserInfo: true
+        hasUserInfo: app.globalData.hasUserInfo
       })
     } else {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -51,8 +88,10 @@ Page({
       console.log("app", app.globalData.userInfo)
 
       app.userInfoReadyCallback = res => {
+        app.globalData.hasUserInfo = true;
+        console.log("app.globalData.hasUserInfo=", app.globalData.hasUserInfo)
         this.setData({
-          hasUserInfo: true
+          hasUserInfo: app.globalData.hasUserInfo
         })
       }
     }

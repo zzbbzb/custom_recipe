@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "w-tab-control": "/components/w-tab-control/w-tab-control",
-    "w-search": "/components/w-search/w-search"
+    "w-search": "/components/w-search/w-search",
+    "mp-dialog": "/weui-miniprogram/dialog/dialog"
   }
 }
