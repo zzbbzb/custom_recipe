@@ -62,10 +62,9 @@ Page({
       name: "addData",
       data: {
         "dataBaseName": "UserInfo",
-        "dataJson": {
+        "dataJsonSet": {
           "userInfo": app.globalData.userInfo
-        },
-        "waitFlag": true
+        }
       }
     }).then(console.log)
     console.log("查找菜谱")

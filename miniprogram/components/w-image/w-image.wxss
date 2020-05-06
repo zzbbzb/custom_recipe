@@ -30,18 +30,3 @@ image{
   right: 30rpx;
   top:40rpx;
 }
-
-.textTitle{
-  width:80%;
-  text-align: center;
-  border-block-end: 1rpx solid #dddddd;
-  font-size:50rpx;
-  padding:20rpx;
-  margin:20rpx;
-  /* min-height: 55rpx; */
-}
-
-.title{
-  display: flex;
-  justify-content: center;
-}

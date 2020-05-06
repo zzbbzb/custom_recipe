@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "w-image": "/components/w-image/w-image"
+    "w-image": "/components/w-image/w-image",
+    "mp-toptips": "/weui-miniprogram/toptips/toptips"
   },
   "navigationBarTitleText": "新建菜譜"
 }

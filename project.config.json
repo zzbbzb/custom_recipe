@@ -9,9 +9,8 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": false,
 		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -20,7 +19,8 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"nodeModules": false
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false
 	},
 	"appid": "wx8a4a57a2ba7d31a4",
 	"projectname": "menu",

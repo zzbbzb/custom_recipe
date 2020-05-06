@@ -22,12 +22,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
+
+    // 更新是否要显示删除图片弹窗
     updataShowDelDialog:function()
     {
       this.setData({
         dialogDelShow: !this.data.dialogDelShow
       })
     },
+
+    // 点击弹窗的确定或者取消按钮
     tapDialogDelButton: function(res)
     {
       console.log(res.detail.index)
@@ -43,7 +47,9 @@ Component({
       }
 
     },
-    GetImage: function()
+
+    // 选择图片
+    tapImage: function()
     {
       wx.chooseImage({
         success: (res) => {
