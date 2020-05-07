@@ -51,7 +51,7 @@
 
 .weui-cell {
   padding: 16px;
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
 }
@@ -141,5 +141,5 @@ button.weui-vcode-btn {
 }
 
 .weui-padding_none {
-  padding:0rpx;
+  padding: 0rpx;
 }

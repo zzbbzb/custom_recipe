@@ -1,11 +1,13 @@
 <!--pages/add/add.wxml-->
 <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
-<view class="container">
+<mp-navigation-bar show="{{true}}" title="新建菜譜" back="{{true}}" background="#dddddd" bindback="goBack"></mp-navigation-bar>
 
+<view class="container">
+  
   <mp-form id="form" rules="{{rules}}" models="{{formData}}">
     <mp-cells>
       <mp-cell prop="{{coverPic}}" title="" ext-class="weui-padding_none">
-        <w-image bind:imgChange="tapImgChange" data-field="{{coverPic}}" />
+        <w-image bind:imgChange="tapImgChange" data-field="{{coverPic}}" /> 
       </mp-cell>
 
       <mp-cell prop="{{foodName}}" title="" ext-class="weui-padding_none">
@@ -23,5 +25,9 @@
   </mp-form>
 
   <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
-
+  
 </view>
+
+<mp-dialog title="" show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="{{[{text: '取消'}, {text: '确认'}]}}">
+    <view>是否要存入草稿箱？</view>
+</mp-dialog>

@@ -30,13 +30,15 @@ Page({
         isNum: true,
         message: '菜品价格要是数字'
       }],
-    }]
+    }],
+    showDialog: false,
+    backDelta: 1
   },
 
   // 提交表单内容
   submitForm: function() {
     this.selectComponent('#form').validate((valid, errors) => {
-      // console.log('valid', valid, errors)
+      console.log('valid', valid, errors)
       if (!valid) {
         const firstError = Object.keys(errors)
         if (firstError.length) {
@@ -99,13 +101,13 @@ Page({
           "base_content": baseContent,
           "content_detail": contentDetail
         },
-        waitFlag: true
+        "waitFlag": true
       }
     }).then(res => {
       console.log("菜谱成功保存,",res)
     })
 
-    console.log("保存菜谱结束")
+    console.log("保存菜谱结束, 返回主页")
   },
 
   // 图片云存储
@@ -159,6 +161,29 @@ Page({
     })
   },
 
+  goBack: function(e)
+  {
+    console.log("goBack = ",e);
+    this.setData({
+      showDialog: !this.data.showDialog,
+      backDelta: e.detail.delta
+    })
+  },
+
+  tapDialogButton: function(e)
+  {
+    console.log("tag=", e)
+    
+    if(e.detail.index === 1) // 确认, 选择保存草稿箱, to_do
+    {
+      
+    }
+
+    wx.navigateBack({
+      delta: this.data.backDelta
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -189,7 +214,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    console.log("onUnload")
   },
 
   /**

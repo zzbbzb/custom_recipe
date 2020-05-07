@@ -4,7 +4,9 @@
     "mp-toptips": "/weui-miniprogram/toptips/toptips",
     "mp-cell": "/weui-miniprogram/cell/cell",
     "mp-cells": "/weui-miniprogram/cells/cells",
-    "mp-form": "/weui-miniprogram/form/form"
+    "mp-form": "/weui-miniprogram/form/form",
+    "mp-navigation-bar": "/weui-miniprogram/navigation-bar/navigation-bar",
+    "mp-dialog": "/weui-miniprogram/dialog/dialog"
   },
-  "navigationBarTitleText": "新建菜譜"
+  "navigationStyle": "custom"
 }

@@ -82,12 +82,12 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 13:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95,84 +95,89 @@ module.exports =
 
 Component({
     options: {
+        multipleSlots: true,
         addGlobalClass: true
     },
     properties: {
-        type: {
-            type: String,
-            value: 'error',
-            observer: '_typeChange'
-        },
-        show: {
-            type: Boolean,
-            value: false,
-            observer: '_showChange'
-        },
-        msg: {
-            type: String,
-            value: ''
-        },
-        delay: {
-            type: Number,
-            value: 2000
-        },
         extClass: {
             type: String,
             value: ''
+        },
+        title: {
+            type: String,
+            value: ''
+        },
+        background: {
+            type: String,
+            value: ''
+        },
+        color: {
+            type: String,
+            value: ''
+        },
+        back: {
+            type: Boolean,
+            value: true
+        },
+        loading: {
+            type: Boolean,
+            value: false
+        },
+        animated: {
+            type: Boolean,
+            value: true
+        },
+        show: {
+            type: Boolean,
+            value: true,
+            observer: '_showChange'
+        },
+        delta: {
+            type: Number,
+            value: 1
         }
     },
     data: {
-        typeClassMap: {
-            'warn': 'weui-toptips_warn',
-            'info': 'weui-toptips_info',
-            'success': 'weui-toptips_success',
-            'error': 'weui-toptips_error'
-        }
+        displayStyle: ''
     },
     attached: function attached() {
-      var _this = this;
-      var data = this.data;
+        var _this = this;
 
-      wx.getSystemInfo({
-        success: function success(res) {
-          var ios = !!(res.system.toLowerCase().search('ios') + 1);
-          _this.setData({
-            ios: ios,
-            statusBarHeight: res.statusBarHeight,
-            className: data.typeClassMap[data.type] || ''
-          });
-        }
-      });
-        // this.setData({
-        //     className: data.typeClassMap[data.type] || ''
-        // });
+        var isSupport = !!wx.getMenuButtonBoundingClientRect;
+        var rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
+        wx.getSystemInfo({
+            success: function success(res) {
+                var ios = !!(res.system.toLowerCase().search('ios') + 1);
+                _this.setData({
+                    ios: ios,
+                    statusBarHeight: res.statusBarHeight,
+                    innerWidth: isSupport ? 'width:' + rect.left + 'px' : '',
+                    innerPaddingRight: isSupport ? 'padding-right:' + (res.windowWidth - rect.left) + 'px' : '',
+                    leftWidth: isSupport ? 'width:' + (res.windowWidth - rect.left) + 'px' : ''
+                });
+            }
+        });
     },
 
     methods: {
-        _typeChange: function _typeChange(newVal) {
-            this.setData({
-                className: this.data.typeClassMap[newVal] || ''
-            });
-            return newVal;
-        },
-        _showChange: function _showChange(newVal) {
-            this._showToptips(newVal);
-        },
-        _showToptips: function _showToptips(newVal) {
-            var _this = this;
-
-            if (newVal && this.data.delay) {
-                setTimeout(function () {
-                    _this.setData({
-                        show: false
-                    }, function () {
-                        _this.triggerEvent('hide', {}, {});
-                    });
-                }, this.data.delay);
+        _showChange: function _showChange(show) {
+            var animated = this.data.animated;
+            var displayStyle = '';
+            if (animated) {
+                displayStyle = 'opacity: ' + (show ? '1' : '0') + ';-webkit-transition:opacity 0.5s;transition:opacity 0.5s;';
+            } else {
+                displayStyle = 'display: ' + (show ? '' : 'none');
             }
             this.setData({
-                show: newVal
+                displayStyle: displayStyle
             });
+        },
+        back: function back() {
+            var data = this.data;
+            // wx.navigateBack({
+            //     delta: data.delta
+            // });
+            this.triggerEvent('back', { delta: data.delta }, {});
         }
     }
 });
