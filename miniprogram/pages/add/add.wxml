@@ -1,15 +1,26 @@
 <!--pages/add/add.wxml-->
 <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
 <view class="container">
-  <w-image />
 
-  <view class="title">
-    <textarea class="textTitle" maxlength="-1" bindblur="bindTextAreaBlur" auto-height placeholder="写下你的菜谱名吧" />
-  </view>
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells>
+      <mp-cell prop="{{coverPic}}" title="" ext-class="weui-padding_none">
+        <w-image bind:imgChange="tapImgChange" data-field="{{coverPic}}" />
+      </mp-cell>
 
-  <view class="title">
-    <textarea class="textTitle" maxlength="20" auto-height placeholder="价格菜谱" />
-  </view>
+      <mp-cell prop="{{foodName}}" title="" ext-class="weui-padding_none">
+        <view class="title">
+          <textarea bindinput="formTextAreaChange" data-field="{{foodName}}" class="textTitle" maxlength="-1" bindblur="bindTextAreaBlur" auto-height placeholder="写下你的菜谱名吧" />
+        </view>
+      </mp-cell>
+
+      <mp-cell prop="{{foodPrice}}" title="" ext-class="weui-padding_none">
+        <view class="title">
+          <textarea bindinput="formTextAreaChange"  class="textTitle" data-field="{{foodPrice}}" maxlength="20" auto-height placeholder="价格菜谱" />
+        </view>
+      </mp-cell>
+    </mp-cells>
+  </mp-form>
 
   <button class="weui-btn" type="primary" bindtap="submitForm">确定</button>
 

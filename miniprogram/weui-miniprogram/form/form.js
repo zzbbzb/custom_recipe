@@ -485,9 +485,15 @@ var defaultMessage = {
     mobile: '请输入正确的手机号',
     email: '请输入正确的电子邮件',
     url: '请输入正确的URL地址',
-    equalTo: '值和字段%s不相等'
+    equalTo: '值和字段%s不相等',
+    isNum: '%s输入要是数字'
 };
 exports.default = {
+    isNum: function isNum (r, val)
+    {
+      if (parseFloat(val).toString() == "NaN")
+        return string_1.sprintf(r.message || defaultMessage.isNum, r.name);   
+    },
     required: function required(r, val, param, models) {
         if (r.required === false) return;
         if (!val) return string_1.sprintf(r.message || defaultMessage.required, r.name);

@@ -44,6 +44,9 @@ Component({
           isShowImg: !this.data.isShowImg,
           isShowDelImg:!this.data.isShowDelImg
         })
+        
+        // 通知修改成功
+        this.triggerEvent('imgChange', { imgPath: this.data.imgPath }, {})
       }
 
     },
@@ -62,6 +65,9 @@ Component({
               isShowImg: !this.data.isShowImg,
               isShowDelImg: !this.data.isShowDelImg
             });
+
+            // 通知修改成功
+            this.triggerEvent('imgChange', { imgPath: this.data.imgPath }, {})
           }
         },
       })

@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  async onLaunch() {
     
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -15,6 +15,18 @@ App({
         traceUser: true,
       })
     }
+
+    // 获取openId
+    await wx.cloud.callFunction({
+      name: "getopenid",
+    }).then(res => {
+      console.log("成功", res.result.openid);
+      this.globalData.openId = res.result.openid
+    }).catch(res => {
+      console.log("失败", res);
+    })
+
+    console.log("openId 结束, 开始获取用户信息")
 
     // 获取用户信息
     wx.getSetting({
@@ -43,9 +55,11 @@ App({
       }
     })
   },
+
   globalData: {
     userInfo: null,
-    hasUserInfo: false
+    hasUserInfo: false,
+    openId: ""
   }
 
 })
