@@ -1,6 +1,7 @@
 // pages/index/index.js
 
 const app = getApp()
+const config = require("../../utils/config.js");
 
 Page({
 
@@ -39,6 +40,12 @@ Page({
   getUserInfo: function (e) {
     console.log("getUserInfo")
     console.log(e)
+    this.getUserInfoOperate(e)
+    
+  },
+
+  async getUserInfoOperate(e)
+  {
     if('userInfo' in e.detail)
     {
       app.globalData.userInfo = e.detail.userInfo;
@@ -46,28 +53,30 @@ Page({
       this.setData({
         hasUserInfo: true
       })
-      // 写入数据库 UserInfo todo
-      console.log("写入数据库 UserInfo todo")
-     
-      this.tt();
+      
+      console.log("写入数据库 UserInfo")
+      // 写入数据库 UserInfo
+      await this.addUserInfo();
       
       // 查找菜谱 todo
+      console.log("查找菜谱")
     }
-    
   },
 
-  async tt()
+  async addUserInfo()
   {
     await wx.cloud.callFunction({
       name: "addData",
       data: {
-        "dataBaseName": "UserInfo",
+        "dataBaseName": config.DATA_BASE_NAME.USER_INFO,
         "dataJsonSet": {
           "userInfo": app.globalData.userInfo
-        }
+        },
+        "delBeforeAdd": true
       }
-    }).then(console.log)
-    console.log("查找菜谱")
+    }).then(res =>{
+      console.log(res)
+    })
   },
   
   /**

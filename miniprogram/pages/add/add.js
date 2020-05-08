@@ -1,6 +1,7 @@
 // pages/add/add.js
 
 const app = getApp();
+const config = require("../../utils/config.js");
 
 Page({
 
@@ -32,49 +33,76 @@ Page({
       }],
     }],
     showDialog: false,
-    backDelta: 1
+    backDelta: 1,
+    validateFormState: false
   },
 
   // 提交表单内容
-  submitForm: function() {
-    this.selectComponent('#form').validate((valid, errors) => {
+  submitForm: function () {
+
+    this.validateFormData();
+
+    if (this.data.validateFormState) {
+      this.upLoadFormDataAndReturn();
+    }
+  },
+
+  // 验证表单数据
+  async validateFormData () {
+    await this.selectComponent('#form').validate((valid, errors) => {
       console.log('valid', valid, errors)
       if (!valid) {
         const firstError = Object.keys(errors)
         if (firstError.length) {
           this.setData({
-            error: errors[firstError[0]].message
+            error: errors[firstError[0]].message,
+            validateFormState: false
           })
 
         }
       } else {
-        // wx.showToast({
-        //   title: '校验通过'
-        // })
-        // 校验通过, 把菜谱添加到数据库, 并且退出新建菜谱
-        console.log("formData = ", this.data.formData);
-        this.uploadFormData();
+        // 校验通过
+        this.setData({
+          validateFormState: true
+        })
       }
     })
   },
 
-  async uploadFormData() {
+  // 更新表单数据并且返回主页面
+  async upLoadFormDataAndReturn(editType) {
+    console.log("formData = ", this.data.formData);
+    await this.uploadFormData(editType);
+
+    console.log("退出新建菜谱")
+
+    wx.navigateBack({
+      delta: this.data.backDelta
+    });
+  },
+
+  // 更新form中的数据
+  async uploadFormData(editType = config.EDIT_TYPE.FINISH) {
     let coverImgPath = this.data.formData[this.data.coverPic];
     // 创建时间
     let curTimeStamp = new Date().getTime();
     // 菜谱id
     let recipeId = app.globalData.openId + curTimeStamp;
     let lastEditTime = curTimeStamp;
-    let editType = 1;
+
+    console.log("before editType=", editType);
+
+    editType = editType;
+
+    console.log("editType=", editType);
 
     let coverImageResult = await this.updataImg(coverImgPath, recipeId);
 
-    if(!coverImageResult.result)
-    {
+    if (!coverImageResult.result) {
       return;
     }
 
-    console.log("coverImageResult 结束")
+    console.log("coverImageResult 结束,")
     let foodName = this.data.formData[this.data.foodName];
     let foodPrice = this.data.formData[this.data.foodPrice];
 
@@ -92,7 +120,7 @@ Page({
     await wx.cloud.callFunction({
       name: "addData",
       data: {
-        "dataBaseName": "Recipe",
+        "dataBaseName": config.DATA_BASE_NAME.RECIPE,
         "dataJsonSet": {
           "recipe_id": recipeId,
           "edit_type": editType,
@@ -104,21 +132,21 @@ Page({
         "waitFlag": true
       }
     }).then(res => {
-      console.log("菜谱成功保存,",res)
+      console.log("菜谱成功保存,", res)
     })
 
     console.log("保存菜谱结束, 返回主页")
   },
 
   // 图片云存储
-  async updataImg(imgPath, recipeId){
+  async updataImg(imgPath, recipeId) {
     let result = false
     let fileId = ""
     // openId/recipe_id/.png
     let curTimeStamp = new Date().getTime();
     console.log(app)
     let cloudPath = app.globalData.openId + "/" + recipeId + "/" + curTimeStamp.toString() + ".png";
-    console.log("cloudPath = ", cloudPath) 
+    console.log("cloudPath = ", cloudPath)
     await wx.cloud.uploadFile({
       cloudPath: cloudPath, // 上传至云端的路径
       filePath: imgPath // 小程序临时文件路径
@@ -131,11 +159,14 @@ Page({
       console.log(res)
     })
 
-    return { result: result, fileId: fileId}
+    return {
+      result: result,
+      fileId: fileId
+    }
   },
 
   // 图片路径变化赋值
-  tapImgChange: function(e) {
+  tapImgChange: function (e) {
     console.log(e);
     let imagePath = e.detail.imgPath;
 
@@ -150,7 +181,7 @@ Page({
   },
 
   // 表单中textArea组件内容发生变化
-  formTextAreaChange: function(e) {
+  formTextAreaChange: function (e) {
     const {
       field
     } = e.currentTarget.dataset
@@ -161,73 +192,87 @@ Page({
     })
   },
 
-  goBack: function(e)
-  {
-    console.log("goBack = ",e);
+  goBack: function (e) {
+    console.log("goBack = ", e);
     this.setData({
       showDialog: !this.data.showDialog,
       backDelta: e.detail.delta
     })
   },
 
-  tapDialogButton: function(e)
-  {
+  tapDialogButton: function (e) {
     console.log("tag=", e)
-    
-    if(e.detail.index === 1) // 确认, 选择保存草稿箱, to_do
-    {
-      
+    if (e.detail.index === 0) {
+      this.setData({
+        showDialog: !this.data.showDialog,
+      })
+
+      wx.navigateBack({
+        delta: this.data.backDelta
+      })
+      return;
     }
 
-    wx.navigateBack({
-      delta: this.data.backDelta
-    });
+    this.validateFormData();
+
+    if (e.detail.index === 1) // 确认, 选择保存草稿箱
+    {
+      if(this.data.validateFormState)
+      {
+        this.upLoadFormDataAndReturn(config.EDIT_TYPE.DRAFT);
+      }
+      else{
+        this.setData({
+          showDialog: !this.data.showDialog,
+        })
+      }
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     console.log("onUnload")
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   }
 })

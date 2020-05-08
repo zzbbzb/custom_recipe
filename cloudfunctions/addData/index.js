@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV
+  env:'test-qjl9w',
 })
 
 let db = cloud.database()
@@ -11,6 +11,12 @@ let db = cloud.database()
 exports.main = async(event, context) => {
   let dataBaseName = event.dataBaseName
   let dataJsonSet = event.dataJsonSet
+  let delBeforeAdd = false
+  if ("delBeforeAdd" in event)
+  {
+    delBeforeAdd = event.delBeforeAdd
+  }
+
   let waitFlag = false
   if("waitFlag" in event)
   {
@@ -20,23 +26,27 @@ exports.main = async(event, context) => {
   const { OPENID } = cloud.getWXContext()
   const db_database = db.collection(dataBaseName)
 
-  // 删除数据
-  db_database.where({
-    _openid: OPENID
-  }).remove();
+  if(delBeforeAdd)
+  {
+    // 删除数据
+    await db_database.where({
+      _openid: OPENID
+    }).remove();
+
+  }
 
   // 添加数据
   if (waitFlag) {
     return await db_database.add({
       data:{
-        _openid: OPENID,
+        "_openid": OPENID,
         "dataJsonSet": dataJsonSet
       }
     })
   } else {
     return db_database.add({
       data: {
-        _openid: OPENID,
+        "_openid": OPENID,
         "dataJsonSet": dataJsonSet
       }
     })
