@@ -8,6 +8,10 @@
     <w-tab-control tab_title="{{tab_title}}" />
     <view class="content">
       <button class="loginBtn" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+
+      <block wx:for="{{recipeList}}">
+        <view>{{item.dataJsonSet.base_content.foodName}}</view>
+      </block>
     </view>
 </view>
 

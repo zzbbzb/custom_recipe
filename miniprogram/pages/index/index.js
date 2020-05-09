@@ -12,7 +12,8 @@ Page({
     search_default_content: "请输入要查找的菜谱名称",
     tab_title: ["菜谱", "收藏", "兑换"],
     hasUserInfo: app.globalData.hasUserInfo,
-    showDialog: false
+    showDialog: false,
+    recipeList: []
   },
 
   addNewMenu: function()
@@ -44,6 +45,7 @@ Page({
     
   },
 
+  // 获得玩家信息的操作
   async getUserInfoOperate(e)
   {
     if('userInfo' in e.detail)
@@ -60,9 +62,32 @@ Page({
       
       // 查找菜谱 todo
       console.log("查找菜谱")
+      await this.getRecipes();
     }
   },
 
+  async getRecipes()
+  {
+    await wx.cloud.callFunction({
+      name: "queryData",
+      data: {
+        "dataBaseName": config.DATA_BASE_NAME.RECIPE,
+        "whereObject": {
+          "_openid": app.globalData.openId,
+          "dataJsonSet.edit_type": config.EDIT_TYPE.FINISH
+        },
+      }
+    }).then(res =>{
+      // console.log("getRecipes=", res)
+      const findList = res.result.data
+      console.log("getRecipes=", findList)
+      this.setData({
+        recipeList: findList
+      })
+    })
+  },
+
+  // 写入userInfo数据库
   async addUserInfo()
   {
     await wx.cloud.callFunction({
