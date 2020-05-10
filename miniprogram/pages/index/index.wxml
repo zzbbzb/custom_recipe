@@ -1,20 +1,39 @@
 <!--pages/index/index.wxml-->
 
 <view class="container">
-    <view class="statusBar">
-      <w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" hasUserInfo="{{hasUserInfo}}" disable/>
-      <image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
-    </view>
-    <w-tab-control tab_title="{{tab_title}}" />
+	<view class="statusBar">
+		<w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" hasUserInfo="{{hasUserInfo}}" disable />
+		<image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
+	</view>
+	<!-- <w-tab-control tab_title="{{tab_title}}" />
     <view class="content">
       <button class="loginBtn" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
 
       <block wx:for="{{recipeList}}">
         <view>{{item.dataJsonSet.base_content.foodName}}</view>
       </block>
-    </view>
+    </view> -->
+
+	<mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected">
+		<block wx:for="{{tabs}}" wx:key="title">
+			<view class="tab-content" slot="tab-content-{{index}}">
+				{{item.title}}
+				<block wx:if="{{index == 0}}">
+					<view>
+						<button>点击</button>
+						<view>tt</view>
+					</view>
+				</block>
+
+				<block wx:if="{{index == 1}}">
+					<view>fuck</view>
+				</block>
+			</view>
+		</block>
+	</mp-tabs>
 </view>
 
+
 <mp-dialog title="" show="{{!hasUserInfo && showDialog}}" bindbuttontap="tapDialogButton" buttons="{{ [{text: '确定'}] }}">
-  <view>需要登录</view>
+	<view>需要登录</view>
 </mp-dialog>

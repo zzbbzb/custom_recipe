@@ -11,6 +11,7 @@ Page({
   data: {
     search_default_content: "请输入要查找的菜谱名称",
     tab_title: ["菜谱", "收藏", "兑换"],
+    tabs:[],
     hasUserInfo: app.globalData.hasUserInfo,
     showDialog: false,
     recipeList: []
@@ -78,7 +79,6 @@ Page({
         },
       }
     }).then(res =>{
-      // console.log("getRecipes=", res)
       const findList = res.result.data
       console.log("getRecipes=", findList)
       this.setData({
@@ -103,11 +103,25 @@ Page({
       console.log(res)
     })
   },
+
+  onTabCLick(e) {
+    const index = e.detail.index
+    this.setData({activeTab: index})
+  },
+
+  onChange(e) {
+    const index = e.detail.index
+    this.setData({activeTab: index})
+  },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    const tabs = this.data.tab_title.map(item => ({title: item}))
+    this.setData({tabs})
+
     if (app.globalData.userInfo) {
       console.log("onLoad app.globalData.userInfo")
       app.globalData.hasUserInfo = true;
