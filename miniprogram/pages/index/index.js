@@ -11,21 +11,19 @@ Page({
   data: {
     search_default_content: "请输入要查找的菜谱名称",
     tab_title: ["菜谱", "收藏", "兑换"],
-    tabs:[],
+    tabs: [],
     hasUserInfo: app.globalData.hasUserInfo,
     showDialog: false,
-    recipeList: []
+    recipeList: [],
+
   },
 
-  addNewMenu: function()
-  {
-    if(this.data.hasUserInfo)
-    {
+  addNewMenu: function () {
+    if (this.data.hasUserInfo) {
       wx.navigateTo({
         url: '/pages/add/add',
       })
-    }
-    else{
+    } else {
       console.log("没有用户信息")
       this.setData({
         showDialog: !this.data.showDialog
@@ -43,32 +41,29 @@ Page({
     console.log("getUserInfo")
     console.log(e)
     this.getUserInfoOperate(e)
-    
+
   },
 
   // 获得玩家信息的操作
-  async getUserInfoOperate(e)
-  {
-    if('userInfo' in e.detail)
-    {
+  async getUserInfoOperate(e) {
+    if ('userInfo' in e.detail) {
       app.globalData.userInfo = e.detail.userInfo;
       app.globalData.hasUserInfo = true;
       this.setData({
         hasUserInfo: true
       })
-      
+
       console.log("写入数据库 UserInfo")
       // 写入数据库 UserInfo
       await this.addUserInfo();
-      
+
       // 查找菜谱 todo
       console.log("查找菜谱")
       await this.getRecipes();
     }
   },
 
-  async getRecipes()
-  {
+  async getRecipes() {
     await wx.cloud.callFunction({
       name: "queryData",
       data: {
@@ -78,7 +73,7 @@ Page({
           "dataJsonSet.edit_type": config.EDIT_TYPE.FINISH
         },
       }
-    }).then(res =>{
+    }).then(res => {
       const findList = res.result.data
       console.log("getRecipes=", findList)
       this.setData({
@@ -88,8 +83,7 @@ Page({
   },
 
   // 写入userInfo数据库
-  async addUserInfo()
-  {
+  async addUserInfo() {
     await wx.cloud.callFunction({
       name: "addData",
       data: {
@@ -99,35 +93,43 @@ Page({
         },
         "delBeforeAdd": true
       }
-    }).then(res =>{
+    }).then(res => {
       console.log(res)
     })
   },
 
   onTabCLick(e) {
     const index = e.detail.index
-    this.setData({activeTab: index})
+    this.setData({
+      activeTab: index
+    })
   },
 
   onChange(e) {
     const index = e.detail.index
-    this.setData({activeTab: index})
+    this.setData({
+      activeTab: index
+    })
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
-    const tabs = this.data.tab_title.map(item => ({title: item}))
-    this.setData({tabs})
+    console.log("onLoad")
+
+    const tabs = this.data.tab_title.map(item => ({
+      title: item
+    }))
+
+    this.setData({
+      tabs
+    })
 
     if (app.globalData.userInfo) {
       console.log("onLoad app.globalData.userInfo")
-      app.globalData.hasUserInfo = true;
-      this.setData({
-        hasUserInfo: app.globalData.hasUserInfo
-      })
+      this.updataUserInfoAndGetOtherInfo()
     } else {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -135,27 +137,56 @@ Page({
       console.log("app", app.globalData.userInfo)
 
       app.userInfoReadyCallback = res => {
-        app.globalData.hasUserInfo = true;
-        console.log("app.globalData.hasUserInfo=", app.globalData.hasUserInfo)
-        this.setData({
-          hasUserInfo: app.globalData.hasUserInfo
-        })
+        this.updataUserInfoAndGetOtherInfo()
       }
     }
+
+    let systemInfo = wx.getSystemInfoSync();
+    let windowHeight = systemInfo.windowHeight;
+    let swiperHeight = windowHeight - getComponentHeight('.statusBar') - 28;
+    this.setData({
+      
+    })
+  },
+
+  async getComponentHeight(name)
+  {
+    let height = 0
+    const query = wx.createSelectorQuery()
+    query.select(name).boundingClientRect()
+    query.selectViewport().scrollOffset()
+    await query.exec((res) => {
+      console.log("res=", res)
+      console.log("height=",res[0].height)
+      height = res[0].height
+    })
+    console.log("获得组件高度结束")
+    return height;
+  },
+
+  async updataUserInfoAndGetOtherInfo() {
+    app.globalData.hasUserInfo = true;
+    console.log("app.globalData.hasUserInfo=", app.globalData.hasUserInfo)
+    this.setData({
+      hasUserInfo: app.globalData.hasUserInfo
+    })
+
+    await this.getRecipes()
+    console.log("getRecipes end")
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log("onReady")
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("onShow")
   },
 
   /**

@@ -103,6 +103,7 @@ Component({
         tabs: { type: Array, value: [] },
         tabClass: { type: String, value: '' },
         swiperClass: { type: String, value: '' },
+        swiperStyle: { type: String, value: ''},
         activeClass: { type: String, value: '' },
         tabUnderlineColor: { type: String, value: '	#E46E59' },
         tabActiveTextColor: { type: String, value: '#000000' },
