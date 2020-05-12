@@ -16,7 +16,7 @@
   background: #dddddd;
 }
 
-image{
+search_image{
   width: 30rpx;
   height: 30rpx;
 }

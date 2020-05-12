@@ -15,7 +15,7 @@ Page({
     hasUserInfo: app.globalData.hasUserInfo,
     showDialog: false,
     recipeList: [],
-
+    swiperHeight: 150
   },
 
   addNewMenu: function () {
@@ -141,27 +141,32 @@ Page({
       }
     }
 
-    let systemInfo = wx.getSystemInfoSync();
-    let windowHeight = systemInfo.windowHeight;
-    let swiperHeight = windowHeight - getComponentHeight('.statusBar') - 28;
-    this.setData({
-      
-    })
+    this.updateSwiperHeight()
   },
 
-  async getComponentHeight(name)
+  async updateSwiperHeight()
   {
-    let height = 0
+    let systemInfo = wx.getSystemInfoSync();
+    let windowHeight = systemInfo.windowHeight;
+    let statusBarHeight = 0;
+
     const query = wx.createSelectorQuery()
-    query.select(name).boundingClientRect()
+    query.select('.statusBar').boundingClientRect()
     query.selectViewport().scrollOffset()
-    await query.exec((res) => {
+    query.exec((res) => {
       console.log("res=", res)
       console.log("height=",res[0].height)
-      height = res[0].height
+      statusBarHeight = res[0].height
+      console.log("windowHeight=", windowHeight.toFixed(2))
+      console.log("statusBarHeight=", statusBarHeight.toFixed(2))
+  
+      let swiperHeight = windowHeight.toFixed(2)- statusBarHeight.toFixed(2) - 28;
+      console.log("swiperHeight=", swiperHeight)
+      this.setData({
+        swiperHeight: swiperHeight
+      })
     })
-    console.log("获得组件高度结束")
-    return height;
+  
   },
 
   async updataUserInfoAndGetOtherInfo() {

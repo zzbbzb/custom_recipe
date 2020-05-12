@@ -2,6 +2,7 @@
   "usingComponents": {
     "w-search": "/components/w-search/w-search",
     "mp-dialog": "/weui-miniprogram/dialog/dialog",
-    "mp-tabs": "/weui-miniprogram/tabs/tabs"
+    "mp-tabs": "/weui-miniprogram/tabs/tabs",
+    "w-item-recipes": "/components/w-item-recipes/w-item-recipes"
   }
 }
