@@ -1,10 +1,10 @@
 <!--components/w-item-recipes/w-item-recipes.wxml-->
 
-<view class="container">
+<view class="recipe_item_container">
   <image class="coverImage" mode="widthFix" src="{{dataJsonSet.base_content.coverImageFileId}}"></image>
   <view>{{dataJsonSet.base_content.foodName}}</view>
   <view class="userInfo">
-    <image src="{{avatorUrl}}"></image>
+    <!-- <image src="{{avatorUrl}}"></image> -->
     <view>{{name}}</view>
   </view>
 </view>

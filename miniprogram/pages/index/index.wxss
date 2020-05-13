@@ -71,11 +71,11 @@ page {
   /* font-weight: bold; */
 }
 
-.content {
+.recipes_content {
   display: flex;
   flex-wrap: wrap;
 }
 
-.content > .item {
+.recipes_content > .recipe_item {
   width:48%;
 }

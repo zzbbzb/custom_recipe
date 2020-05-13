@@ -1,8 +1,11 @@
 /* components/w-item-recipes/w-item-recipes.wxss */
-.container{
-
+.recipe_item_container {
+  text-align: center;
+  color: #333;
+  padding-bottom: 85prx;
 }
 
 .coverImage {
-  
+  width: 100%;
+  border-radius: 10rpx;
 }
