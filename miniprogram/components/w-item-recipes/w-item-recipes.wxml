@@ -1,7 +1,7 @@
 <!--components/w-item-recipes/w-item-recipes.wxml-->
 
 <view class="recipe_item_container">
-  <image class="coverImage" mode="widthFix" src="{{dataJsonSet.base_content.coverImageFileId}}"></image>
+  <image class="coverImage" mode="widthFix" src="{{dataJsonSet.base_content.coverImageFileId}}" binderror="showCoverImageError" lazy-load="true"></image>
   <view>{{dataJsonSet.base_content.foodName}}</view>
   <view class="userInfo">
     <!-- <image src="{{avatorUrl}}"></image> -->

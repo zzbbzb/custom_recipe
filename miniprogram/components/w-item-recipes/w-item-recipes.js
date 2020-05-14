@@ -21,6 +21,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    showCoverImageError: function(e)
+    {
+      console.log("coverImage=", e);
+    }
   }
 })
