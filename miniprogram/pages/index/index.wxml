@@ -14,22 +14,30 @@
       </block>
     </view> -->
 
-	<mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper"  swiperStyle="height:{{swiperHeight}}px" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected">
+	<mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" swiperStyle="height:{{swiperHeight}}px" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected">
 		<block wx:for="{{tabs}}" wx:key="title">
 			<view class="tab-content" slot="tab-content-{{index}}">
 
 				<button class="loginBtn" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
 
 				<block wx:else>
-					<view class="recipes_content">
 
-						<block wx:for="{{recipeList}}" wx:key="index">
-							<w-item-recipes class="recipe_item" dataJsonSet="{{recipeList[index].dataJsonSet}}">
-						
-							</w-item-recipes>
-						</block>
-						
-					</view>
+					<block wx:if="{{index == 0}}">
+						<view class="recipes_content">
+							<view class="vContent">
+								<block wx:for="{{recipeList}}" wx:key="index">
+									<w-item-recipes class="recipe_item" wx:if="{{index % 2 == 0}}" dataJsonSet="{{recipeList[index].dataJsonSet}}">
+									</w-item-recipes>
+								</block>
+							</view>
+							<view class="vContent">
+								<block wx:for="{{recipeList}}" wx:key="index">
+									<w-item-recipes class="recipe_item" wx:if="{{index % 2 == 1}}" dataJsonSet="{{recipeList[index].dataJsonSet}}">
+									</w-item-recipes>
+								</block>
+							</view>
+						</view>
+					</block>
 					<!-- <block wx:if="{{index == 0}}">
 						<view>
 							<block wx:for="{{recipeList}}" wx:key="index">
@@ -42,7 +50,7 @@
 						<view>fuck</view>
 					</block> -->
 				</block>
-					
+
 			</view>
 		</block>
 	</mp-tabs>

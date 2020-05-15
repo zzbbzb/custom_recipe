@@ -74,8 +74,19 @@ page {
 .recipes_content {
   display: flex;
   flex-wrap: wrap;
+  width:100%;
+  justify-content: space-evenly;
 }
 
-.recipes_content > .recipe_item {
+.recipes_content > .vContent {
   width:48%;
+}
+
+.vContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe_item {
+  margin: 10rpx;
 }
