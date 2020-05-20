@@ -5,6 +5,27 @@
 		<w-search isOnlyImageBtn default_content="{{search_default_content}}" search_width="{{60}}" class="search" hasUserInfo="{{hasUserInfo}}" disable />
 		<image class="addImg" src="/asserts/images/add/add.png" bindtap="addNewMenu"></image>
 	</view>
+
+	<view class="userDetails">
+		<view class="userInfo">
+			<text class="userInfo-name">{{userInfo.nickName}}</text>
+			<image class="userInfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+		</view>
+
+		<view class="userDetail">
+			<view class="userDetail-focus">
+				<view>{{focusNum}}</view>
+				<view>关注</view>
+			</view>
+
+			<view class="userDetail-fans">
+				<view>{{fansNum}}</view>
+				<view>粉丝</view>
+			</view>
+			<button class="btn" >编辑资料</button>
+		</view>
+
+	</view>
 	<!-- <w-tab-control tab_title="{{tab_title}}" />
     <view class="content">
       <button class="loginBtn" wx:if="{{!hasUserInfo}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>

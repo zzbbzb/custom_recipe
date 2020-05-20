@@ -15,7 +15,10 @@ Page({
     hasUserInfo: app.globalData.hasUserInfo,
     showDialog: false,
     recipeList: [],
-    swiperHeight: 150
+    swiperHeight: 150,
+    userInfo:{},
+    focusNum: 0,
+    fansNum: 0
   },
 
   addNewMenu: function () {
@@ -173,7 +176,8 @@ Page({
     app.globalData.hasUserInfo = true;
     console.log("app.globalData.hasUserInfo=", app.globalData.hasUserInfo)
     this.setData({
-      hasUserInfo: app.globalData.hasUserInfo
+      hasUserInfo: app.globalData.hasUserInfo,
+      userInfo: app.globalData.userInfo
     })
 
     await this.getRecipes()

@@ -90,3 +90,39 @@ page {
 .recipe_item {
   margin: 10rpx;
 }
+
+.userInfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx 60rpx 20rpx 20rpx;
+  border-radius: 50%;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.userInfo-name {
+  margin:auto 0;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.userDetail-focus {
+  display: flex;
+  flex-direction: column;
+}
+
+.userDetail {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 100rpx;
+  
+}
