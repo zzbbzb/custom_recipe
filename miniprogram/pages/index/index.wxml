@@ -12,17 +12,22 @@
 			<image class="userInfo-avatar" src="{{userInfo.avatarUrl}}"></image>
 		</view>
 
-		<view class="userDetail">
-			<view class="userDetail-focus">
-				<view>{{focusNum}}</view>
-				<view>关注</view>
+		<view class="userDetailOther">
+			<view class="userDetail">
+				<view class="userDetail-focus">
+					<view>{{focusNum}}</view>
+					<view>关注</view>
+				</view>
+
+				<view class="userDetail-fans">
+					<view>{{fansNum}}</view>
+					<view>粉丝</view>
+				</view>
 			</view>
 
-			<view class="userDetail-fans">
-				<view>{{fansNum}}</view>
-				<view>粉丝</view>
+			<view class="userDetail-btn">
+				<button type="primary" size="mini">编辑资料</button>
 			</view>
-			<button class="btn" >编辑资料</button>
 		</view>
 
 	</view>
@@ -59,17 +64,39 @@
 							</view>
 						</view>
 					</block>
-					<!-- <block wx:if="{{index == 0}}">
-						<view>
-							<block wx:for="{{recipeList}}" wx:key="index">
-								<view>{{item.dataJsonSet.base_content.foodName}}</view>
-							</block>
-						</view>
-					</block>
 
 					<block wx:if="{{index == 1}}">
-						<view>fuck</view>
-					</block> -->
+						<!-- <mp-tabs tabs="{{menu_tabs}}" activeTab="{{menu_activeTab}}" swiperClass="weui-tabs-swiper" swiperStyle="height:{{menu_swiperHeight}}px" bindtabclick="onMenuTabCLick" bindchange="onMenuChange" activeClass="tab-bar-title__selected">
+							<block wx:for="{{menu_tabs}}" wx:key="menu_index" wx:for-index="menu_index">
+								<view class="tab-content" slot="tab-content-{{menu_index}}">
+
+								</view>
+							</block>
+						</mp-tabs> -->
+
+						<view class="vContent vContent_width">
+							<block wx:for="{{recipeList}}" wx:key="index">
+								<w-item-menu class="recipe_item" dataJsonSet="{{recipeList[index].dataJsonSet}}">
+								</w-item-menu>
+							</block>
+						</view>
+
+
+						<!-- <view class="recipes_content">
+							<view class="vContent">
+								<block wx:for="{{recipeList}}" wx:key="index">
+									<w-item-recipes class="recipe_item" wx:if="{{index % 2 == 0}}" dataJsonSet="{{recipeList[index].dataJsonSet}}">
+									</w-item-recipes>
+								</block>
+							</view>
+							<view class="vContent">
+								<block wx:for="{{recipeList}}" wx:key="index">
+									<w-item-recipes class="recipe_item" wx:if="{{index % 2 == 1}}" dataJsonSet="{{recipeList[index].dataJsonSet}}">
+									</w-item-recipes>
+								</block>
+							</view>
+						</view> -->
+					</block>
 				</block>
 
 			</view>

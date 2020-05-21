@@ -1,0 +1,53 @@
+/* components/w-item-menu/w-item-menu.wxss */
+.menu_item_img {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.menu_item_minus {
+  margin-right: 10rpx;
+}
+
+.menu_item_add {
+  margin-left: 10rpx;
+}
+
+.menu_item_update {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.menu_item_price_and_num {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.recipe_item_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.itemImage {
+  width: 260rpx;
+  height: 160rpx;
+}
+
+.menu_item_info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu_item_food_name {
+  text-align: center;
+  margin: auto;
+  font-size: 40rpx;
+  line-height: 20rpx;
+  font-weight: bold;
+}
+
+.menu_item_price {
+  margin-left: 20rpx;
+}

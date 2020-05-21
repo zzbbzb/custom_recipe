@@ -10,15 +10,18 @@ Page({
    */
   data: {
     search_default_content: "请输入要查找的菜谱名称",
-    tab_title: ["菜谱", "收藏", "兑换"],
+    tab_title: ["菜谱", "菜单"],
     tabs: [],
+    menu_tab_title: ["今日", "历史"],
+    menu_tabs:[],
     hasUserInfo: app.globalData.hasUserInfo,
     showDialog: false,
     recipeList: [],
     swiperHeight: 150,
-    userInfo:{},
+    userInfo: {},
     focusNum: 0,
-    fansNum: 0
+    fansNum: 0,
+    activeTab: 1
   },
 
   addNewMenu: function () {
@@ -115,6 +118,20 @@ Page({
     })
   },
 
+  onMenuTabCLick(e) {
+    const index = e.detail.index
+    this.setData({
+      menu_activeTab: index
+    })
+  },
+
+  onMenuChange(e) {
+    const index = e.detail.index
+    this.setData({
+      menu_activeTab: index
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -126,8 +143,13 @@ Page({
       title: item
     }))
 
+    const menu_tabs = this.data.menu_tab_title.map(item => ({
+      title: item
+    }))
+
     this.setData({
-      tabs
+      tabs,
+      menu_tabs
     })
 
     if (app.globalData.userInfo) {
@@ -147,8 +169,8 @@ Page({
     this.updateSwiperHeight()
   },
 
-  async updateSwiperHeight()
-  {
+  // 更新swiper的高度
+  async updateSwiperHeight() {
     let systemInfo = wx.getSystemInfoSync();
     let windowHeight = systemInfo.windowHeight;
     let statusBarHeight = 0;
@@ -156,20 +178,23 @@ Page({
     const query = wx.createSelectorQuery()
     query.select('.statusBar').boundingClientRect()
     query.selectViewport().scrollOffset()
+    query.select('.userDetails').boundingClientRect()
+    query.selectViewport().scrollOffset()
     query.exec((res) => {
       console.log("res=", res)
-      console.log("height=",res[0].height)
+      console.log("height=", res[0].height)
       statusBarHeight = res[0].height
       console.log("windowHeight=", windowHeight.toFixed(2))
       console.log("statusBarHeight=", statusBarHeight.toFixed(2))
-  
-      let swiperHeight = windowHeight.toFixed(2)- statusBarHeight.toFixed(2) - 28;
+
+      let userDetailsHeight = res[2].height
+      console.log("userDetailsHeight=", userDetailsHeight.toFixed(2))
+      let swiperHeight = windowHeight.toFixed(2) - statusBarHeight.toFixed(2) - userDetailsHeight.toFixed(2) - 28;
       console.log("swiperHeight=", swiperHeight)
       this.setData({
         swiperHeight: swiperHeight
       })
     })
-  
   },
 
   async updataUserInfoAndGetOtherInfo() {

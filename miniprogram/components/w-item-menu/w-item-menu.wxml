@@ -1,0 +1,21 @@
+<!--components/w-item-menu/w-item-menu.wxml-->
+<view class="recipe_item_container">
+	<image class="itemImage" mode="aspectFill" src="{{dataJsonSet.base_content.coverImageFileId}}" binderror="showCoverImageError" lazy-load="true"></image>
+	<view class="menu_item_info">
+		<view class="menu_item_food_name">
+{{dataJsonSet.base_content.foodName}}
+		</view>
+		<view class="menu_item_price_and_num">
+			<view class="menu_item_price">￥{{dataJsonSet.base_content.foodPrice}}</view>
+			<view class="menu_item_update">
+				<image wx:if="{{itemNum != 0}}" class="menu_item_img menu_item_minus" src="/asserts/images/menu_item/minus.png" bindtap="minusItemNum"></image>
+				<view wx:if="{{itemNum != 0}}">{{itemNum}}</view>
+				<image class="menu_item_img menu_item_add" src="/asserts/images/menu_item/add.png" bindtap="addItemNum"></image>
+			</view>
+		</view>
+	</view>
+	<view class="userInfo">
+		<!-- <image src="{{avatorUrl}}"></image> -->
+		<view>{{name}}</view>
+	</view>
+</view>

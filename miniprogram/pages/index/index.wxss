@@ -82,6 +82,10 @@ page {
   width:48%;
 }
 
+.vContent_width {
+  width: 100%;
+}
+
 .vContent {
   display: flex;
   flex-direction: column;
@@ -113,16 +117,25 @@ page {
 .userDetail-focus {
   display: flex;
   flex-direction: column;
+  margin-left: 60rpx;
 }
 
 .userDetail {
   display: flex;
   flex-direction: row;
-  margin-top: 20rpx;
+}
+
+.userDetail-fans{
+  margin-left: 50rpx;
+}
+
+.userDetailOther {
+  display: flex;
+  flex-direction: row;
+  margin: 20rpx 0 20rpx 0;
   justify-content: space-between;
 }
 
-.btn {
-  width: 100rpx;
-  
+.userDetail-btn {
+  margin-right: 60rpx;
 }

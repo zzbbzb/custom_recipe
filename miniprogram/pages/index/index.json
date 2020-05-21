@@ -3,6 +3,7 @@
     "w-search": "/components/w-search/w-search",
     "mp-dialog": "/weui-miniprogram/dialog/dialog",
     "mp-tabs": "/weui-miniprogram/tabs/tabs",
-    "w-item-recipes": "/components/w-item-recipes/w-item-recipes"
+    "w-item-recipes": "/components/w-item-recipes/w-item-recipes",
+    "w-item-menu": "/components/w-item-menu/w-item-menu"
   }
 }
