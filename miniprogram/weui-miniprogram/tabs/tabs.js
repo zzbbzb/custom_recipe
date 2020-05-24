@@ -104,6 +104,7 @@ Component({
         tabClass: { type: String, value: '' },
         swiperClass: { type: String, value: '' },
         swiperStyle: { type: String, value: ''},
+        scrollViewStyle: { type: String, value: ''}, 
         activeClass: { type: String, value: '' },
         tabUnderlineColor: { type: String, value: '	#E46E59' },
         tabActiveTextColor: { type: String, value: '#000000' },
@@ -115,7 +116,7 @@ Component({
         duration: { type: Number, value: 500 }
     },
     data: {
-        currentView: 0
+        currentView: 0,
     },
     observers: {
         activeTab: function activeTab(_activeTab) {
@@ -140,6 +141,12 @@ Component({
             var index = e.detail.current;
             this.setData({ activeTab: index });
             this.triggerEvent('change', { index: index });
+        },
+        scroll(e) {
+
+        },
+        upper(e){
+
         }
     }
 });

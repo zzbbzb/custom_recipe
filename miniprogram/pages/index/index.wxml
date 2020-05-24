@@ -9,7 +9,7 @@
 	<view class="userDetails">
 		<view class="userInfo">
 			<text class="userInfo-name">{{userInfo.nickName}}</text>
-			<image class="userInfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+			<image class="userInfo-avatar" src="{{userInfo.avatarUrl}}" bindload="handleAvatarLoad"></image>
 		</view>
 
 		<view class="userDetailOther">
@@ -40,7 +40,7 @@
       </block>
     </view> -->
 
-	<mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" swiperStyle="height:{{swiperHeight}}px" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected">
+	<mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" swiperStyle="height:{{swiperHeight}}px;" scrollViewStyle="{{isLockScroll ? 'overflow-y: hidden;' : 'height:'+ swiperHeight+'px;'}}" bindtabclick="onTabCLick" bindchange="onChange" activeClass="tab-bar-title__selected">
 		<block wx:for="{{tabs}}" wx:key="title">
 			<view class="tab-content" slot="tab-content-{{index}}">
 

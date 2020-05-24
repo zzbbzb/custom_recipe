@@ -14,10 +14,9 @@
   </view>
   <swiper class="{{swiperClass}}" current="{{activeTab}}" duration="{{duration}}" bindchange="handleSwiperChange" style="{{swiperStyle}}">
     <swiper-item wx:for="{{tabs}}" wx:key="title">
-     <scroll-view scroll-y="true" style="{{swiperStyle}}" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <slot name="tab-content-{{index}}"></slot>
+     <scroll-view scroll-y="true" style="{{swiperClass}}; {{scrollViewStyle}}" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll">
+        <slot name="tab-content-{{index}}"></slot>
      </scroll-view>
-      
     </swiper-item>
   </swiper>
 </view>

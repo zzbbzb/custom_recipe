@@ -21,7 +21,9 @@ Page({
     userInfo: {},
     focusNum: 0,
     fansNum: 0,
-    activeTab: 1
+    activeTab: 1,
+    scrollTopOffset: 0,
+    isLockScroll: true
   },
 
   addNewMenu: function () {
@@ -165,7 +167,11 @@ Page({
         this.updataUserInfoAndGetOtherInfo()
       }
     }
+  },
 
+  // 处理等待图片加载完
+  handleAvatarLoad: function()
+  {
     this.updateSwiperHeight()
   },
 
@@ -189,10 +195,15 @@ Page({
 
       let userDetailsHeight = res[2].height
       console.log("userDetailsHeight=", userDetailsHeight.toFixed(2))
-      let swiperHeight = windowHeight.toFixed(2) - statusBarHeight.toFixed(2) - userDetailsHeight.toFixed(2) - 28;
+      let swiperHeight = windowHeight.toFixed(2) - 28
+      console.log("type statusBarHeight.toFixed(2)=", typeof(statusBarHeight.toFixed(2)))
+      let scrollTopOffset = parseFloat(statusBarHeight.toFixed(2)) + parseFloat(userDetailsHeight.toFixed(2))
+      console.log("scrollTopOffset=", scrollTopOffset)
+      // windowHeight.toFixed(2) - statusBarHeight.toFixed(2) - userDetailsHeight.toFixed(2) - 28;
       console.log("swiperHeight=", swiperHeight)
       this.setData({
-        swiperHeight: swiperHeight
+        swiperHeight: swiperHeight,
+        scrollTopOffset: scrollTopOffset
       })
     })
   },
@@ -248,7 +259,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    
+    // this.setData({
+    //   isLockScroll: false
+    // })
+    // console.log("onReachBottom=", this.data.isLockScroll)
   },
 
   /**
@@ -256,5 +271,23 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onPageScroll: function(e) {
+    console.log(e)
+    console.log("this.data.scrollTopOffset=", this.data.scrollTopOffset)
+    if(e.scrollTop >= this.data.scrollTopOffset - 2)
+    {
+      console.log("isLockScroll=", this.data.isLockScroll)
+      this.setData({
+        isLockScroll: false
+      })
+    }
+    else{
+      console.log("isLockScroll1=", this.data.isLockScroll)
+      this.setData({
+        isLockScroll: true
+      })
+    }
   }
 })
